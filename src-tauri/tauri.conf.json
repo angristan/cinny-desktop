@@ -1,7 +1,7 @@
 {
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["app"],
     "windows": {
       "certificateThumbprint": null,
       "digestAlgorithm": "sha256",
@@ -27,7 +27,7 @@
     "macOS": {
       "frameworks": [],
       "minimumSystemVersion": "",
-      "exceptionDomain": "",
+      "exceptionDomain": null,
       "signingIdentity": null,
       "providerShortName": null,
       "entitlements": null
@@ -37,7 +37,7 @@
         "depends": []
       }
     },
-    "createUpdaterArtifacts": "v1Compatible"
+    "createUpdaterArtifacts": false
   },
   "build": {
     "beforeBuildCommand": "cd cinny && npm run build",
