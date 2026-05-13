@@ -5,9 +5,11 @@
 
 // mod menu;
 
+#[cfg(target_os = "macos")]
+use tauri::TitleBarStyle;
 use tauri::{
-    webview::{NewWindowResponse, WebviewWindowBuilder},
-    WebviewUrl,
+    webview::{Color, NewWindowResponse, WebviewWindowBuilder},
+    Theme, WebviewUrl,
 };
 use tauri_plugin_opener::OpenerExt;
 
@@ -39,8 +41,19 @@ pub fn run() {
             };
 
             let app_handle = app.handle().clone();
-            WebviewWindowBuilder::new(app, "main".to_string(), window_url)
+            let mut window_builder = WebviewWindowBuilder::new(app, "main".to_string(), window_url)
                 .title("Cinny")
+                .theme(Some(Theme::Dark))
+                .background_color(Color(28, 28, 28, 255));
+
+            #[cfg(target_os = "macos")]
+            {
+                window_builder = window_builder
+                    .title_bar_style(TitleBarStyle::Transparent)
+                    .hidden_title(true);
+            }
+
+            window_builder
                 .on_new_window(move |url, _features| {
                     let _ = app_handle.opener().open_url(url.as_str(), None::<&str>);
                     NewWindowResponse::Deny
