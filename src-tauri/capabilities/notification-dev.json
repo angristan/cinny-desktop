@@ -1,0 +1,10 @@
+{
+  "identifier": "notification-dev-capability",
+  "description": "Notification permissions for the Vite dev server.",
+  "local": false,
+  "remote": {
+    "urls": ["http://localhost:8080"]
+  },
+  "windows": ["main"],
+  "permissions": ["notification:default"]
+}

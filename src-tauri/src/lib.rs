@@ -5,7 +5,10 @@
 
 // mod menu;
 
-use tauri::{webview::{NewWindowResponse, WebviewWindowBuilder}, WebviewUrl};
+use tauri::{
+    webview::{NewWindowResponse, WebviewWindowBuilder},
+    WebviewUrl,
+};
 use tauri_plugin_opener::OpenerExt;
 
 pub fn run() {
@@ -21,6 +24,7 @@ pub fn run() {
     builder
         .plugin(tauri_plugin_localhost::Builder::new(port).build())
         .plugin(tauri_plugin_window_state::Builder::default().build())
+        .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_opener::init())
         .setup(move |app| {
             // Dev: use devUrl from tauri.conf.json (http://localhost:8080) to support HMR
